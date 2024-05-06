@@ -1985,14 +1985,16 @@ Docs: https://kubernetes.io/docs/concepts/services-networking/ingress-controller
 
 
 
-# Storage Docs: https://kubernetes.io/docs/concepts/storage/volumes/
+# Storage 
+
+Docs: https://kubernetes.io/docs/concepts/storage/volumes/
 
 # CSI
 - CSI is a standard/specification developed by the CNCF for accessing storage in any container environment.
 - Storage vendors can develop/implement a CSI driver for their storage systems.
 - Kubernetes has adopted CSI spec 1.0, any plugin that adhere to CSI standards can be used with Kubernetes.
 
-# storage in containers
+# Storage in containers
 - pods/Container file system is ephemeral/temporary and is deleted when container is removed or recreated
 - To hold on to data persistantly, we need a non-ephemeral solution that allow data to be stored beyond the lifecycle of pod and share data across pods
 - kubernetes volumes solves these problems. Volume abstracts the actual location of storage away from the containers.
@@ -2032,16 +2034,19 @@ Docs: https://kubernetes.io/docs/concepts/services-networking/ingress-controller
 
 Docs: https://kubernetes.io/docs/concepts/storage/volumes/#volume-types
 
-Volumes and Persistent Volumes have a **volume type**, which determines how the storage is
-actually handled (mechanism for storage).
+Volumes and Persistent Volumes have a **volume type**, which determines how the storage is actually handled (mechanism for storage).
 
 Various volumes types support storage methods such as:
-
 - Network File System (NFS)
 - Cloud storage (AWS, Azure, GCP, etc)
 - Kubernetes ConfigMaps and Secrets
 - Simple directory on the cluster Nodes
 
+Kubernetes volume types:	
+		- ephemeral volumes:
+			- Ephemeral volumes are bound to the pod's lifetime(emptyDir{})
+			- Data stored locally on the Kubernetes node and are deleted when a pod restarts(hostPath)
+    - persistent volumes (PV): which retain data even after a pod shuts down(pv, pvc, sc).
 
 ### Common Volume Types
 
