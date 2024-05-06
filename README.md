@@ -1987,9 +1987,15 @@ Docs: https://kubernetes.io/docs/concepts/services-networking/ingress-controller
 
 # Storage
 
-- Container file system is ephemeral/temporary and is deleted when container is removed or 
+CSI
+	• CSI is a standard/specification developed by the CNCF for accessing storage in any container environment.
+	• Storage vendors can develop/implement a CSI driver for their storage systems.
+ 	• Kubernetes has adopted CSI spec 1.0, any plugin that adhere to CSI standards can be used with Kubernetes.
+
+
+- pods/Container file system is ephemeral/temporary and is deleted when container is removed or 
   recreated
-- To hold on to data persistantly, we need a non-ephemeral solution
+- To hold on to data persistantly, we need a non-ephemeral solution that allow data to be stored beyond the lifecycle of pod and share data across pods
 
 
 ## Volumes
