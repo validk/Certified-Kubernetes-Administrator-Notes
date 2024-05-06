@@ -1985,33 +1985,22 @@ Docs: https://kubernetes.io/docs/concepts/services-networking/ingress-controller
 
 
 
-# Storage
+# Storage Docs: https://kubernetes.io/docs/concepts/storage/volumes/
 
-CSI
-	• CSI is a standard/specification developed by the CNCF for accessing storage in any container environment.
-	• Storage vendors can develop/implement a CSI driver for their storage systems.
- 	• Kubernetes has adopted CSI spec 1.0, any plugin that adhere to CSI standards can be used with Kubernetes.
+# CSI
+- CSI is a standard/specification developed by the CNCF for accessing storage in any container environment.
+- Storage vendors can develop/implement a CSI driver for their storage systems.
+- Kubernetes has adopted CSI spec 1.0, any plugin that adhere to CSI standards can be used with Kubernetes.
 
-
-- pods/Container file system is ephemeral/temporary and is deleted when container is removed or 
-  recreated
+# storage in containers
+- pods/Container file system is ephemeral/temporary and is deleted when container is removed or recreated
 - To hold on to data persistantly, we need a non-ephemeral solution that allow data to be stored beyond the lifecycle of pod and share data across pods
+- kubernetes volumes solves these problems. Volume abstracts the actual location of storage away from the containers.
+    - A Kubernetes volume is a directory, which can be accessed by containers in a Kubernetes pod and exists beyond life-cycle of pod.
+    - "volume type", which helps to configure its storage in different ways. Ex:  local(hostPath, emptyDir), nfs, oci-bv, aws, GlusterFS, Flocker, cephfs etc
+    - Mounting the same volume into multiple containers allows for sharing of data between containers on the same Pod
+    	- Could have a "sidecar" container with special tools to process data from main container
 
-
-## Volumes
-
-Allow storage of data outside of the container file system while allowing the container to
-access the data at runtime.
-
-Docs: https://kubernetes.io/docs/concepts/storage/volumes/
-
-- Volume belongs to the Pod and there for the life of the Pod
-- Available even if container is removed, data is still there
-- Simple container external storage
-- Can be set up with Pod/container specification
-- Mounting the same volume into multiple containers allows for sharing of data between containers
-  on the same Pod
-    - Could have a "sidecar" container with special tools to process data from main container
 - **Example**: Pod directory mounted into the container
     - ```yaml
         apiVersion: v1
